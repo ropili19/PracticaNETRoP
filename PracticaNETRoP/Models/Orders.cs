@@ -19,7 +19,6 @@ namespace PracticaNETRoP.Models
         public int idClient { get; set; }
         public int idProduct { get; set; }
     
-        public virtual Clients Clients { get; set; }
         public virtual Products Products { get; set; }
     }
 }

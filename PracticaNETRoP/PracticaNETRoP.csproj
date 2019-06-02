@@ -195,37 +195,34 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Clients.cs">
-      <DependentUpon>virtualShop.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoices.cs">
-      <DependentUpon>virtualShop.tt</DependentUpon>
+      <DependentUpon>VirtualShop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Orders.cs">
-      <DependentUpon>virtualShop.tt</DependentUpon>
+      <DependentUpon>VirtualShop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Products.cs">
-      <DependentUpon>virtualShop.tt</DependentUpon>
+      <DependentUpon>VirtualShop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Stock.cs">
-      <DependentUpon>virtualShop.tt</DependentUpon>
+      <DependentUpon>VirtualShop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\virtualShop.Context.cs">
+    <Compile Include="Models\VirtualShop.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>virtualShop.Context.tt</DependentUpon>
+      <DependentUpon>VirtualShop.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\virtualShop.cs">
+    <Compile Include="Models\VirtualShop.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>virtualShop.tt</DependentUpon>
+      <DependentUpon>VirtualShop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\virtualShop.Designer.cs">
+    <Compile Include="Models\VirtualShop.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>virtualShop.edmx</DependentUpon>
+      <DependentUpon>VirtualShop.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -239,24 +236,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\virtualShop.Context.tt">
+    <Content Include="Models\VirtualShop.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>virtualShop.edmx</DependentUpon>
-      <LastGenOutput>virtualShop.Context.cs</LastGenOutput>
+      <DependentUpon>VirtualShop.edmx</DependentUpon>
+      <LastGenOutput>VirtualShop.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\virtualShop.tt">
+    <Content Include="Models\VirtualShop.edmx.sql" />
+    <Content Include="Models\VirtualShop.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>virtualShop.edmx</DependentUpon>
-      <LastGenOutput>virtualShop.cs</LastGenOutput>
+      <DependentUpon>VirtualShop.edmx</DependentUpon>
+      <LastGenOutput>VirtualShop.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\virtualShop.edmx">
+    <EntityDeploy Include="Models\VirtualShop.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>virtualShop.Designer.cs</LastGenOutput>
+      <LastGenOutput>VirtualShop.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\virtualShop.edmx.diagram">
-      <DependentUpon>virtualShop.edmx</DependentUpon>
+    <Content Include="Models\VirtualShop.edmx.diagram">
+      <DependentUpon>VirtualShop.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

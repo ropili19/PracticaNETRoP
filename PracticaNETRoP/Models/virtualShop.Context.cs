@@ -13,10 +13,10 @@ namespace PracticaNETRoP.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VirtualShopEntities1 : DbContext
+    public partial class VirtualShopEntities2 : DbContext
     {
-        public VirtualShopEntities1()
-            : base("name=VirtualShopEntities1")
+        public VirtualShopEntities2()
+            : base("name=VirtualShopEntities2")
         {
         }
     
@@ -25,7 +25,6 @@ namespace PracticaNETRoP.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Invoices> Invoices { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Products> Products { get; set; }
