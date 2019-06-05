@@ -29,5 +29,7 @@ namespace PracticaNETRoP.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<PracticaNETRoP.Models.Products> Products { get; set; }
     }
 }

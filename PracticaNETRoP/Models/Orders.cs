@@ -14,11 +14,16 @@ namespace PracticaNETRoP.Models
     
     public partial class Orders
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Orders()
+        {
+            this.Products = new HashSet<Products>();
+        }
+    
         public int Id { get; set; }
         public int units { get; set; }
-        public int idClient { get; set; }
-        public int idProduct { get; set; }
     
-        public virtual Products Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Products> Products { get; set; }
     }
 }

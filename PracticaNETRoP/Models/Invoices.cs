@@ -15,8 +15,8 @@ namespace PracticaNETRoP.Models
     public partial class Invoices
     {
         public int Id { get; set; }
-        public int id_client { get; set; }
         public decimal amount { get; set; }
         public System.DateTime dateInvoice { get; set; }
+        public int idClient { get; set; }
     }
 }

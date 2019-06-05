@@ -383,7 +383,6 @@ C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNE
 C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
-C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\obj\Debug\PracticaNETRoP.csprojAssemblyReference.cache
 C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\obj\Debug\PracticaNETRoP.csproj.CoreCompileInputs.cache
 C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\obj\Debug\PracticaNETRoP.csproj.CopyComplete
 C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\obj\Debug\PracticaNETRoP.dll
