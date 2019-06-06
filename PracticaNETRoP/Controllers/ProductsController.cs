@@ -9,125 +9,39 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using PracticaNETRoP.Models;
+using System.Web;
+using System.Web.Mvc;
+
 
 namespace PracticaNETRoP.Controllers
 {
-    public class ProductsController : ApiController
+    public class ProductsController : Controller
     {
         private shoopbooksEntities db = new shoopbooksEntities();
 
-        // GET: api/Products
-        public IQueryable<Products> GetProducts()
+        private const int PRODUCT_WITHOUT_STOCK = 2;
+
+        // GET: Products
+        public ActionResult Products()
         {
-            return db.Products;
+            return View(db.Products.ToList());
         }
 
-        // GET: api/Products/5
-        [ResponseType(typeof(Products))]
-        public IHttpActionResult GetProducts(int id)
+        // GET: Products/Details/5
+        public ActionResult Details(int? id)
         {
-            Products products = db.Products.Find(id);
-            if (products == null)
+            if (id == null)
             {
-                return NotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            return Ok(products);
+            Products producto = db.Products.Find(id);
+            if (producto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(producto);
         }
 
-        // PUT: api/Products/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutProducts(int id, Products products)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != products.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(products).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Products
-        [ResponseType(typeof(Products))]
-        public IHttpActionResult PostProducts(Products products)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Products.Add(products);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (ProductsExists(products.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = products.Id }, products);
-        }
-
-        // DELETE: api/Products/5
-        [ResponseType(typeof(Products))]
-        public IHttpActionResult DeleteProducts(int id)
-        {
-            Products products = db.Products.Find(id);
-            if (products == null)
-            {
-                return NotFound();
-            }
-
-            db.Products.Remove(products);
-            db.SaveChanges();
-
-            return Ok(products);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool ProductsExists(int id)
-        {
-            return db.Products.Count(e => e.Id == id) > 0;
-        }
     }
+
 }
