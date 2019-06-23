@@ -20,7 +20,11 @@ namespace PracticaNETRoP.Controllers
 
         private const int PRODUCT_WITHOUT_STOCK = 2;
 
-
+        // GET: Products
+        public ActionResult Index()
+        {
+            return View(db.Products.ToList());
+        }
 
         // GET: Products
         public ActionResult Products()
@@ -39,22 +43,28 @@ namespace PracticaNETRoP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,name,price,stock,description,image")] Products producto,HttpPostedFileBase image)
+        public ActionResult Create([Bind(Include = "Id,name,price,stock,description,image,imageFile")] Products producto, HttpPostedFileBase imgFile)
         {
             if (ModelState.IsValid)
             {
-                if (image != null)
+                if (imgFile != null)
                 {
-                    string fileName = Path.GetFileNameWithoutExtension(image.FileName);
-                    string extension = Path.GetExtension(image.FileName);
+                    string fileName = Path.GetFileNameWithoutExtension(imgFile.FileName);
+                    string extension = Path.GetExtension(imgFile.FileName);
                     fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    producto.image = "~/images/" + fileName;
+                    producto.image = "/images/" + fileName;
                     fileName = Path.Combine(Server.MapPath("~/images/"), fileName);
-                    producto.img.SaveAs(fileName);//
+                  
+                    imgFile.SaveAs(fileName);
 
+                
                 }
-                db.Products.Add(producto);
-                db.SaveChanges();
+                using (VirtualShopEntities db= new VirtualShopEntities()){
+                    db.Products.Add(producto);
+                    db.SaveChanges();
+                }
+              // db.Products.Add(producto);
+              //  db.SaveChanges();
                 ModelState.Clear();
                 return RedirectToAction("Index");
             }
@@ -77,7 +87,7 @@ namespace PracticaNETRoP.Controllers
             Products product = db.Products.Find(id);
             Stock stock = db.Stock.Find(product.Id);
 
-            if (numberOfProducts >= stock.units)
+            if (numberOfProducts > product.stock)
             {
                 TempData["notice_error"] = "No existe suficiente stock para el producto solicitado";
             }

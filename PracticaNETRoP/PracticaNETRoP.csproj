@@ -222,6 +222,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Model1.Views.cs" />
     <Compile Include="Models\Orders.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -322,14 +323,11 @@
     <Content Include="Views\Products\Products.cshtml" />
     <Content Include="Views\cardshoop\Index.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Products\Create.cshtml">
-      <BrowseToURL>~/Products/Create</BrowseToURL>
-    </Content>
-    <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Carrito\IndexCarrito.cshtml" />
     <Content Include="Views\Carrito\AddCarrito.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

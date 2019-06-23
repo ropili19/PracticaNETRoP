@@ -12,11 +12,11 @@ namespace PracticaNETRoP
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.MapRoute(
+         /*   routes.MapRoute(
               name: "Products",
               url: "Products",
               defaults: new { controller = "Products", action = "Products", id = UrlParameter.Optional }
-            );
+            );*/
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

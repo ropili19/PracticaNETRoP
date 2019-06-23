@@ -1,6 +1,91 @@
-﻿@{
-    Layout = "~/Views/Products/Products.cshtml";
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<PracticaNETRoP.Models.Products>
+
+@{
+    ViewBag.Title = "Index";
 }
 
+<h2>Productos</h2>
 
-ffffffffffffff
+@if (User.Identity.GetUserName().Equals("admin@upm.es"))
+{
+    <p>
+        @Html.ActionLink("Crear artículo", "Create")
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stock)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        if (item.stock == 0)
+                        {
+                            <img src="~/Content/img/noProduct.jpg" with="40px" height="100px" alt="Image" />
+                        }
+                        else
+                        {
+                            <img src="@(item.image)" with="40px" height="100px" alt="Image" />
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stock)
+                </td>
+                <td>
+
+                    @if (User.Identity.GetUserName().Equals("admin@upm.es"))
+                    {
+                        @Html.ActionLink("Editar | ", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Detalle | ", "Details", new { id = item.Id })
+                        @Html.ActionLink("Borrar | ", "Delete", new { id = item.Id })
+                    }
+                    else
+                    {
+                        if (item.stock > 0)
+                        {
+                            @Html.ActionLink("Añadir al carrito", "Add", new { id = item.Id })
+                        }
+                        else
+                        {
+                            <p>No hay stock</p>
+                        }
+                    }
+
+                </td>
+            </tr>
+        }
+    }
+
+</table>

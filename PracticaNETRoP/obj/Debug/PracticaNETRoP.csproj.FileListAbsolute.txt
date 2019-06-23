@@ -387,3 +387,4 @@ C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNE
 C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\obj\Debug\PracticaNETRoP.csproj.CopyComplete
 C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\obj\Debug\PracticaNETRoP.dll
 C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\obj\Debug\PracticaNETRoP.pdb
+C:\Users\rosar\source\repos\rosario\controldeversiones\PracticaNETRoP\PracticaNETRoP\obj\Debug\PracticaNETRoP.csprojAssemblyReference.cache

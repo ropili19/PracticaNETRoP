@@ -16,6 +16,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    @RenderBody()
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -29,22 +30,21 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Products " ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Products")</li>
-                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Carrito" ? "active" : "")">
-                            @{ PracticaNETRoP.Models.Carrito shoppingCard = (PracticaNETRoP.Models.Carrito)HttpContext.Current.Session["ID_CC_Productos"];}
-                            @if (shoppingCard != null)
-                            {
-                                @Html.ActionLink("Ver carrito (" + @shoppingCard.Count() + ")", "Index", "cardshoop")
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Ver carrito", "Index", "cardshoop")
-                            }
-                        </li>
 
-                    }
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Products " ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Products")</li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Carrito" ? "active" : "")">
+                        @{ PracticaNETRoP.Models.Carrito shoppingCard = (PracticaNETRoP.Models.Carrito)HttpContext.Current.Session["ID_CC_Productos"];}
+                        @if (shoppingCard != null)
+                        {
+                            @Html.ActionLink("Ver carrito (" + @shoppingCard.Count() + ")", "Index", "cardshoop")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Ver carrito", "Index", "cardshoop")
+                        }
+                    </li>
+
+
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
 
@@ -72,47 +72,37 @@
                 @Html.DisplayNameFor(model => model.description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.image)
             </th>
             <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
-    <tr>
-        @{
-            if (item.stock == 0)
-            {
-                <img src="~/Content/App_LocalResources/SoldOut.jpg" with="40px" height="100px" alt="Image" />
-            }
-            else
-            {
-               
-            }
-        }
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.stock)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.image)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            <tr>
+                @{
 
-            @Html.ActionLink("Añade al Carrito", "Add", "Carrito", new { id = item.Id }, null)
-        </td>
-    </tr>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td></td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+                    @Html.ActionLink("Añade al Carrito", "Add", "Carrito", new { id = item.Id }, null)
+                </td>
+            </tr>
         }
 
     </table>
