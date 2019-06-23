@@ -28,7 +28,7 @@
                         @{ PracticaNETRoP.Models.Carrito shoppingCard = (PracticaNETRoP.Models.Carrito)HttpContext.Current.Session["ID_CC_Productos"];}
                         @if (shoppingCard != null)
                         {
-                            @Html.ActionLink("Ver carrito (" + @shoppingCard.Count() + ")", "Index", "ShoppingCard")
+                            @Html.ActionLink("Ver carrito (" + @shoppingCard.Count() + ")", "Index", "Carrito")
                         }
                         else
                         {
