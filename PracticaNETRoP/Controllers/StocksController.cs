@@ -14,7 +14,7 @@ namespace PracticaNETRoP.Controllers
 {
     public class StocksController : ApiController
     {
-        private shoopbooksEntities db = new shoopbooksEntities();
+        private VirtualShopEntities db = new VirtualShopEntities();
 
         // GET: api/Stocks
         public IQueryable<Stock> GetStock()

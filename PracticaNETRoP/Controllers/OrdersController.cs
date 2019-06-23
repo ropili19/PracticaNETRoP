@@ -14,7 +14,7 @@ namespace PracticaNETRoP.Controllers
 {
     public class OrdersController : ApiController
     {
-        private shoopbooksEntities db = new shoopbooksEntities();
+        private VirtualShopEntities db = new VirtualShopEntities();
 
         // GET: api/Orders
         public IQueryable<Orders> GetOrders()

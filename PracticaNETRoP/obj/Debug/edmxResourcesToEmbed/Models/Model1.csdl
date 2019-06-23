@@ -1,38 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="VirtualShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Invoice">
+  <EntityType Name="Invoices">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="id_client" Type="Int32" Nullable="false" />
     <Property Name="amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="dateInvoice" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="idOrder" Type="Int32" />
-    <NavigationProperty Name="Order" Relationship="Self.FK_Invoices_Order" FromRole="Invoices" ToRole="Orders" />
-  </EntityType>
-  <EntityType Name="Order">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="units" Type="Int32" Nullable="false" />
+    <Property Name="dateInvoice" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="idClient" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Order" FromRole="Orders" ToRole="Invoices" />
-    <NavigationProperty Name="Product" Relationship="VirtualShopModel.ProductOrder" FromRole="Order" ToRole="Product" />
-    <Property Name="ProductId" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="Product">
+  <EntityType Name="Orders">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="units" Type="Int32" Nullable="false" />
-    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="ProductOrder" Relationship="Self.FK_ProductOrder_Orders" FromRole="Orders" ToRole="ProductOrder" />
+  </EntityType>
+  <EntityType Name="ProductOrder">
+    <Key>
+      <PropertyRef Name="Orders_Id" />
+      <PropertyRef Name="Products_Id" />
+    </Key>
+    <Property Name="Orders_Id" Type="Int32" Nullable="false" />
+    <Property Name="Products_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_ProductOrder_Orders" FromRole="ProductOrder" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Stocks" Relationship="Self.FK_Stock_Products" FromRole="Products" ToRole="Stock" />
-    <NavigationProperty Name="Orders" Relationship="VirtualShopModel.ProductOrder" FromRole="Product" ToRole="Order" />
+    <Property Name="stock" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Stock1" Relationship="VirtualShopModel.FK_Stock_products" FromRole="Products" ToRole="Stock" />
   </EntityType>
   <EntityType Name="Stock">
     <Key>
@@ -41,59 +45,44 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="idProduct" Type="Int32" Nullable="false" />
     <Property Name="units" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Stock_Products" FromRole="Stock" ToRole="Products" />
+    <NavigationProperty Name="Products" Relationship="VirtualShopModel.FK_Stock_products" FromRole="Stock" ToRole="Products" />
   </EntityType>
-  <Association Name="FK_Invoices_Order">
-    <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
-    <End Role="Invoices" Type="Self.Invoice" Multiplicity="*" />
+  <Association Name="FK_ProductOrder_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Orders">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Invoices">
-        <PropertyRef Name="idOrder" />
+      <Dependent Role="ProductOrder">
+        <PropertyRef Name="Orders_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Stock_Products">
-    <End Role="Products" Type="Self.Product" Multiplicity="1" />
-    <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+  <EntityContainer Name="VirtualShopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Invoices" EntityType="Self.Invoices" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" />
+    <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" />
+    <EntitySet Name="Products" EntityType="Self.Products" />
+    <EntitySet Name="Stock" EntityType="Self.Stock" />
+    <AssociationSet Name="FK_ProductOrder_Orders" Association="Self.FK_ProductOrder_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="ProductOrder" EntitySet="ProductOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stock_products" Association="VirtualShopModel.FK_Stock_products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Stock" EntitySet="Stock" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Stock_products">
+    <End Type="VirtualShopModel.Products" Role="Products" Multiplicity="1" />
+    <End Type="VirtualShopModel.Stock" Role="Stock" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Products">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Stock">
         <PropertyRef Name="idProduct" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityContainer Name="VirtualShopEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Invoices" EntityType="Self.Invoice" />
-    <EntitySet Name="Orders" EntityType="Self.Order" />
-    <EntitySet Name="Products" EntityType="Self.Product" />
-    <EntitySet Name="Stocks" EntityType="Self.Stock" />
-    <AssociationSet Name="FK_Invoices_Order" Association="Self.FK_Invoices_Order">
-      <End Role="Orders" EntitySet="Orders" />
-      <End Role="Invoices" EntitySet="Invoices" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Stock_Products" Association="Self.FK_Stock_Products">
-      <End Role="Products" EntitySet="Products" />
-      <End Role="Stock" EntitySet="Stocks" />
-    </AssociationSet>
-    <AssociationSet Name="ProductOrder" Association="VirtualShopModel.ProductOrder">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="Order" EntitySet="Orders" />
-    </AssociationSet>
-  </EntityContainer>
-  <Association Name="ProductOrder">
-    <End Type="VirtualShopModel.Product" Role="Product" Multiplicity="1" />
-    <End Type="VirtualShopModel.Order" Role="Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

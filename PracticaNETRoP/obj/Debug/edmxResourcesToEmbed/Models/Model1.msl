@@ -2,38 +2,44 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="VirtualShopModelStoreContainer" CdmEntityContainer="VirtualShopEntities">
     <EntitySetMapping Name="Invoices">
-      <EntityTypeMapping TypeName="VirtualShopModel.Invoice">
+      <EntityTypeMapping TypeName="VirtualShopModel.Invoices">
         <MappingFragment StoreEntitySet="Invoices">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="id_client" ColumnName="id_client" />
           <ScalarProperty Name="amount" ColumnName="amount" />
           <ScalarProperty Name="dateInvoice" ColumnName="dateInvoice" />
-          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="VirtualShopModel.Order">
-        <MappingFragment StoreEntitySet="Orders">
-          <ScalarProperty Name="ProductId" ColumnName="idProduct" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="units" ColumnName="units" />
           <ScalarProperty Name="idClient" ColumnName="idClient" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="VirtualShopModel.Product">
-        <MappingFragment StoreEntitySet="Products">
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="VirtualShopModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="units" ColumnName="units" />
-          <ScalarProperty Name="image" ColumnName="image" />
-          <ScalarProperty Name="description" ColumnName="description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Stocks">
+    <EntitySetMapping Name="ProductOrder">
+      <EntityTypeMapping TypeName="VirtualShopModel.ProductOrder">
+        <MappingFragment StoreEntitySet="ProductOrder">
+          <ScalarProperty Name="Orders_Id" ColumnName="Orders_Id" />
+          <ScalarProperty Name="Products_Id" ColumnName="Products_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="VirtualShopModel.Products">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stock">
       <EntityTypeMapping TypeName="VirtualShopModel.Stock">
         <MappingFragment StoreEntitySet="Stock">
           <ScalarProperty Name="Id" ColumnName="Id" />

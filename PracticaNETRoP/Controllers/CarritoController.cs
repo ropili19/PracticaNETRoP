@@ -10,22 +10,35 @@ namespace PracticaNETRoP.Controllers
 {
         public class CarritoController : Controller
         {
-        private Models.shoopbooksEntities db = new Models.shoopbooksEntities();
+        private Models.VirtualShopEntities db = new Models.VirtualShopEntities();
 
-        public ActionResult Index(Carrito cc)
+       public ActionResult Index(Carrito cc)
             {
                 return View(cc);
             }
-
-
-            public ActionResult AddProducto(Carrito cc, int id)
-            {
-                Products p = db.Products.Find(id);
-                cc.Add(p);
-
-                return RedirectToAction("Index", "Productoes");
-            }
+        public ActionResult OrderCreated()
+        {
+            return View();
         }
+
+        /*      public ActionResult AddProducto(Carrito cc, int id)
+              {
+                  Products p = db.Products.Find(id);
+                  cc.Add(p);
+
+                  return RedirectToAction("Index", "Productoes");
+              }*/
+        // GET: Carrito
+        public ActionResult Add(int id, Carrito cc)
+        {
+          
+            Products prod = db.Products.Find(id);
+            cc.Add(prod);
+
+            //return View("Index", cc);
+            return RedirectToAction("Index", "Home");
+        }
+    }
     
 }
 

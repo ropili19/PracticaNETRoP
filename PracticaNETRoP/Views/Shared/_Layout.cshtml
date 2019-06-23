@@ -25,19 +25,23 @@
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     @if (Request.IsAuthenticated)
                     {
-                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Product" ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Product")</li>
-                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "ShoppingCard" ? "active" : "")">
-                            @Html.ActionLink("Ver carrito", "Index", "ShoppingCard")
-                            @{ PracticaNETRoP.Models.Carrito CardShop = (PracticaNETRoP.Models.Carrito)HttpContext.Current.Session["KEY"];}
-                            @if (CardShop != null)
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Products " ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Products")</li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Carrito" ? "active" : "")">
+                            @{ PracticaNETRoP.Models.Carrito shoppingCard = (PracticaNETRoP.Models.Carrito)HttpContext.Current.Session["ID_CC_Productos"];}
+                            @if (shoppingCard != null)
                             {
-                                <span class="shopping-card-size">(@CardShop.Count())</span>
+                                @Html.ActionLink("Ver carrito (" + @shoppingCard.Count() + ")", "Index", "ShoppingCard")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Ver carrito", "Index", "cardshoop")
                             }
                         </li>
+
                     }
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Productos", "Productos", "Productos")</li>
+
 
                 </ul>
                 @Html.Partial("_LoginPartial")

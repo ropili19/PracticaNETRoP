@@ -1,51 +1,120 @@
 ﻿@model IEnumerable<PracticaNETRoP.Models.Products>
 
 @{
-    ViewBag.Title = "View";
+      Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>View</h2>
+<!DOCTYPE html>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.units)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th></th>
-    </tr>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - The house of books </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("The house of books", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Products " ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Products")</li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Carrito" ? "active" : "")">
+                            @{ PracticaNETRoP.Models.Carrito shoppingCard = (PracticaNETRoP.Models.Carrito)HttpContext.Current.Session["ID_CC_Productos"];}
+                            @if (shoppingCard != null)
+                            {
+                                @Html.ActionLink("Ver carrito (" + @shoppingCard.Count() + ")", "Index", "cardshoop")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Ver carrito", "Index", "cardshoop")
+                            }
+                        </li>
 
-@foreach (var item in Model) {
+                    }
+                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.image)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
     <tr>
+        @{
+            if (item.stock == 0)
+            {
+                <img src="~/Content/App_LocalResources/SoldOut.jpg" with="40px" height="100px" alt="Image" />
+            }
+            else
+            {
+               
+            }
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.units)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.image)
+            @Html.DisplayFor(modelItem => item.stock)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.image)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+            @Html.ActionLink("Añade al Carrito", "Add", "Carrito", new { id = item.Id }, null)
         </td>
     </tr>
-}
+        }
 
-</table>
+    </table>
+</body>
+</html>
