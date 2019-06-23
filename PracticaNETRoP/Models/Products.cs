@@ -24,8 +24,9 @@ namespace PracticaNETRoP.Models
         public int Id { get; set; }
         public decimal price { get; set; }
         public string image { get; set; }
+        public HttpPostedFileBase imgFile;
 
-        private HttpPostedFileBase imgFile;
+        /*private HttpPostedFileBase imgFile;
 
         public HttpPostedFileBase GetimgFile()
         {
@@ -35,7 +36,7 @@ namespace PracticaNETRoP.Models
         public void SetimgFile(HttpPostedFileBase value)
         {
             imgFile = value;
-        }
+        }*/
 
         public string name { get; set; }
         public string description { get; set; }

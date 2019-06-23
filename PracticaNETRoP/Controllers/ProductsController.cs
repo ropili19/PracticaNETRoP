@@ -43,7 +43,7 @@ namespace PracticaNETRoP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,name,price,stock,description,image,imageFile")] Products producto, HttpPostedFileBase imgFile)
+        public ActionResult Create([Bind(Include = "Id,name,price,stock,description,image")] Products producto, HttpPostedFileBase imgFile)
         {
             if (ModelState.IsValid)
             {
@@ -112,6 +112,9 @@ namespace PracticaNETRoP.Controllers
             {
                 return HttpNotFound();
             }
+
+            string img = producto.image;
+            producto.image = img.Replace("~", "");
             return View(producto);
         }
         // POST: Products/Edit/5
