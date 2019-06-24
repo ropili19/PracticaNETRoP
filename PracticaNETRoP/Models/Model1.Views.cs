@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(PracticaNETRoP.Models.VirtualShopEntities),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets5655a7f9fccdb1e87219bd6916cd1b1baaf89b1b09c7665e5ac89885922d8c0d))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets19df825776fc6166fc290cc0784d879905e3484c962f40a79c1af77825deb3f1))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework 6 Power Tools", "0.9.2.0")]
-    internal sealed class ViewsForBaseEntitySets5655a7f9fccdb1e87219bd6916cd1b1baaf89b1b09c7665e5ac89885922d8c0d : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySets19df825776fc6166fc290cc0784d879905e3484c962f40a79c1af77825deb3f1 : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "5655a7f9fccdb1e87219bd6916cd1b1baaf89b1b09c7665e5ac89885922d8c0d"; }
+            get { return "19df825776fc6166fc290cc0784d879905e3484c962f40a79c1af77825deb3f1"; }
         }
 
         /// <summary>
@@ -52,37 +52,37 @@ namespace Edm_EntityMappingGeneratedViews
                 return GetView0();
             }
 
-            if (extentName == "VirtualShopEntities.Invoices")
+            if (extentName == "VirtualShopModelStoreContainer.Orders")
             {
                 return GetView1();
             }
 
-            if (extentName == "VirtualShopModelStoreContainer.Orders")
+            if (extentName == "VirtualShopModelStoreContainer.ProductOrder")
             {
                 return GetView2();
             }
 
-            if (extentName == "VirtualShopModelStoreContainer.ProductOrder")
+            if (extentName == "VirtualShopModelStoreContainer.Products")
             {
                 return GetView3();
             }
 
-            if (extentName == "VirtualShopEntities.Orders")
+            if (extentName == "VirtualShopModelStoreContainer.Stock")
             {
                 return GetView4();
             }
 
-            if (extentName == "VirtualShopEntities.ProductOrder")
+            if (extentName == "VirtualShopEntities.Invoices")
             {
                 return GetView5();
             }
 
-            if (extentName == "VirtualShopModelStoreContainer.Products")
+            if (extentName == "VirtualShopEntities.Orders")
             {
                 return GetView6();
             }
 
-            if (extentName == "VirtualShopModelStoreContainer.Stock")
+            if (extentName == "VirtualShopEntities.ProductOrder")
             {
                 return GetView7();
             }
@@ -108,35 +108,16 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Invoices
-        [VirtualShopModel.Store.Invoices](T1.Invoices_Id, T1.Invoices_amount, T1.Invoices_dateInvoice, T1.Invoices_idClient)
+        [VirtualShopModel.Store.Invoices](T1.Invoices_Id, T1.Invoices_amount, T1.Invoices_dateInvoice, T1.Invoices_idClient, T1.Invoices_idOrder)
     FROM (
         SELECT 
             T.Id AS Invoices_Id, 
             T.amount AS Invoices_amount, 
             T.dateInvoice AS Invoices_dateInvoice, 
             T.idClient AS Invoices_idClient, 
+            T.idOrder AS Invoices_idOrder, 
             True AS _from0
         FROM VirtualShopEntities.Invoices AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for VirtualShopEntities.Invoices.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView1()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing Invoices
-        [VirtualShopModel.Invoices](T1.Invoices_Id, T1.Invoices_amount, T1.Invoices_dateInvoice, T1.Invoices_idClient)
-    FROM (
-        SELECT 
-            T.Id AS Invoices_Id, 
-            T.amount AS Invoices_amount, 
-            T.dateInvoice AS Invoices_dateInvoice, 
-            T.idClient AS Invoices_idClient, 
-            True AS _from0
-        FROM VirtualShopModelStoreContainer.Invoices AS T
     ) AS T1");
         }
 
@@ -144,15 +125,16 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for VirtualShopModelStoreContainer.Orders.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView2()
+        private static DbMappingView GetView1()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Orders
-        [VirtualShopModel.Store.Orders](T1.Orders_Id, T1.Orders_units)
+        [VirtualShopModel.Store.Orders](T1.Orders_Id, T1.Orders_ClientId, T1.Orders_dateCreation)
     FROM (
         SELECT 
             T.Id AS Orders_Id, 
-            T.units AS Orders_units, 
+            T.ClientId AS Orders_ClientId, 
+            T.dateCreation AS Orders_dateCreation, 
             True AS _from0
         FROM VirtualShopEntities.Orders AS T
     ) AS T1");
@@ -162,53 +144,19 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for VirtualShopModelStoreContainer.ProductOrder.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView3()
+        private static DbMappingView GetView2()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ProductOrder
-        [VirtualShopModel.Store.ProductOrder](T1.[ProductOrder.Orders_Id], T1.[ProductOrder.Products_Id])
+        [VirtualShopModel.Store.ProductOrder](T1.[ProductOrder.Orders_Id], T1.[ProductOrder.Products_Id], T1.ProductOrder_units, T1.ProductOrder_id)
     FROM (
         SELECT 
             T.Orders_Id AS [ProductOrder.Orders_Id], 
             T.Products_Id AS [ProductOrder.Products_Id], 
+            T.units AS ProductOrder_units, 
+            T.id AS ProductOrder_id, 
             True AS _from0
         FROM VirtualShopEntities.ProductOrder AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for VirtualShopEntities.Orders.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView4()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing Orders
-        [VirtualShopModel.Orders](T1.Orders_Id, T1.Orders_units)
-    FROM (
-        SELECT 
-            T.Id AS Orders_Id, 
-            T.units AS Orders_units, 
-            True AS _from0
-        FROM VirtualShopModelStoreContainer.Orders AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for VirtualShopEntities.ProductOrder.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView5()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing ProductOrder
-        [VirtualShopModel.ProductOrder](T1.[ProductOrder.Orders_Id], T1.[ProductOrder.Products_Id])
-    FROM (
-        SELECT 
-            T.Orders_Id AS [ProductOrder.Orders_Id], 
-            T.Products_Id AS [ProductOrder.Products_Id], 
-            True AS _from0
-        FROM VirtualShopModelStoreContainer.ProductOrder AS T
     ) AS T1");
         }
 
@@ -216,7 +164,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for VirtualShopModelStoreContainer.Products.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView6()
+        private static DbMappingView GetView3()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Products
@@ -238,7 +186,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for VirtualShopModelStoreContainer.Stock.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView7()
+        private static DbMappingView GetView4()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Stock
@@ -250,6 +198,66 @@ namespace Edm_EntityMappingGeneratedViews
             T.units AS Stock_units, 
             True AS _from0
         FROM VirtualShopEntities.Stock AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for VirtualShopEntities.Invoices.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView5()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Invoices
+        [VirtualShopModel.Invoices](T1.Invoices_Id, T1.Invoices_amount, T1.Invoices_dateInvoice, T1.Invoices_idClient, T1.Invoices_idOrder)
+    FROM (
+        SELECT 
+            T.Id AS Invoices_Id, 
+            T.amount AS Invoices_amount, 
+            T.dateInvoice AS Invoices_dateInvoice, 
+            T.idClient AS Invoices_idClient, 
+            T.idOrder AS Invoices_idOrder, 
+            True AS _from0
+        FROM VirtualShopModelStoreContainer.Invoices AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for VirtualShopEntities.Orders.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView6()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Orders
+        [VirtualShopModel.Orders](T1.Orders_Id, T1.Orders_ClientId, T1.Orders_dateCreation)
+    FROM (
+        SELECT 
+            T.Id AS Orders_Id, 
+            T.ClientId AS Orders_ClientId, 
+            T.dateCreation AS Orders_dateCreation, 
+            True AS _from0
+        FROM VirtualShopModelStoreContainer.Orders AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for VirtualShopEntities.ProductOrder.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView7()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing ProductOrder
+        [VirtualShopModel.ProductOrder](T1.[ProductOrder.Orders_Id], T1.[ProductOrder.Products_Id], T1.ProductOrder_units, T1.ProductOrder_id)
+    FROM (
+        SELECT 
+            T.Orders_Id AS [ProductOrder.Orders_Id], 
+            T.Products_Id AS [ProductOrder.Products_Id], 
+            T.units AS ProductOrder_units, 
+            T.id AS ProductOrder_id, 
+            True AS _from0
+        FROM VirtualShopModelStoreContainer.ProductOrder AS T
     ) AS T1");
         }
 

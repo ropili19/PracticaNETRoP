@@ -4,14 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f243ac8d03c442a0a08299f896107648" Name="Diagram1">
-        <EntityTypeShape EntityType="VirtualShopModel.Invoices" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VirtualShopModel.Orders" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="VirtualShopModel.ProductOrder" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="VirtualShopModel.Products" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VirtualShopModel.Stock" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="7193d2160b614895bad69f663318484d" Name="Diagram1">
+        <EntityTypeShape EntityType="VirtualShopModel.Invoices" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VirtualShopModel.Orders" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VirtualShopModel.ProductOrder" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="VirtualShopModel.Products" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VirtualShopModel.Stock" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="VirtualShopModel.FK_Invoices_Orders" ManuallyRouted="false" />
         <AssociationConnector Association="VirtualShopModel.FK_ProductOrder_Orders" ManuallyRouted="false" />
-        <AssociationConnector Association="VirtualShopModel.FK_Stock_products" />
+        <AssociationConnector Association="VirtualShopModel.FK_Stock_products" ManuallyRouted="false" />
+        <AssociationConnector Association="VirtualShopModel.FK_ProductOrder_Products" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

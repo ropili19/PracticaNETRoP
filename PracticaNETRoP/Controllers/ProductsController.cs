@@ -43,7 +43,7 @@ namespace PracticaNETRoP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,name,price,stock,description,image")] Products producto, HttpPostedFileBase imgFile)
+        public ActionResult Create([Bind(Include = "name,price,stock,description,image")] Products producto, HttpPostedFileBase imgFile)
         {
             if (ModelState.IsValid)
             {
@@ -59,12 +59,12 @@ namespace PracticaNETRoP.Controllers
 
                 
                 }
-                using (VirtualShopEntities db= new VirtualShopEntities()){
+              /*  using (VirtualShopEntities db= new VirtualShopEntities()){
                     db.Products.Add(producto);
                     db.SaveChanges();
-                }
-              // db.Products.Add(producto);
-              //  db.SaveChanges();
+                }*/
+               db.Products.Add(producto);
+                db.SaveChanges();
                 ModelState.Clear();
                 return RedirectToAction("Index");
             }
@@ -126,13 +126,24 @@ namespace PracticaNETRoP.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (product != null &&  product.stock< PRODUCT_WITHOUT_STOCK)
+                if (product.Stock1 != null && product.stock > PRODUCT_WITHOUT_STOCK)
+                {
+                    //TODO la relacion debe ser 1 a 1 --> Deuda técnica
+                    foreach (var stock in product.Stock1)
+                    {
+                        product.Stock1.Remove(stock);
+                    }
+
+                }
+                else
                 {
                     Stock stock = new Stock
                     {
                         idProduct = product.Id,
                         units = product.stock
                     };
+
+                    product.Stock1.Add(stock);
                 }
 
                 db.Entry(product).State = EntityState.Modified;
@@ -140,6 +151,7 @@ namespace PracticaNETRoP.Controllers
                 return RedirectToAction("Index");
             }
             return View(product);
+
         }
 
         // GET: Products/Delete/5

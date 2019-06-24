@@ -16,7 +16,10 @@ namespace PracticaNETRoP.Models
     {
         public int Orders_Id { get; set; }
         public int Products_Id { get; set; }
+        public Nullable<int> units { get; set; }
+        public int id { get; set; }
     
         public virtual Orders Orders { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

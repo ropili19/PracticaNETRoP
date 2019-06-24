@@ -18,5 +18,8 @@ namespace PracticaNETRoP.Models
         public decimal amount { get; set; }
         public System.DateTime dateInvoice { get; set; }
         public int idClient { get; set; }
+        public Nullable<int> idOrder { get; set; }
+    
+        public virtual Orders Orders { get; set; }
     }
 }

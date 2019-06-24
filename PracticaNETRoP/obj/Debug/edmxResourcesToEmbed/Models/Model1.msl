@@ -8,20 +8,24 @@
           <ScalarProperty Name="amount" ColumnName="amount" />
           <ScalarProperty Name="dateInvoice" ColumnName="dateInvoice" />
           <ScalarProperty Name="idClient" ColumnName="idClient" />
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="VirtualShopModel.Orders">
         <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="units" ColumnName="units" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProductOrder">
       <EntityTypeMapping TypeName="VirtualShopModel.ProductOrder">
         <MappingFragment StoreEntitySet="ProductOrder">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="units" ColumnName="units" />
           <ScalarProperty Name="Orders_Id" ColumnName="Orders_Id" />
           <ScalarProperty Name="Products_Id" ColumnName="Products_Id" />
         </MappingFragment>

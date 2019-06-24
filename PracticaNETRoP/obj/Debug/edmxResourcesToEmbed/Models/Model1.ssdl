@@ -4,31 +4,34 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="dateInvoice" Type="datetime" Nullable="false" />
     <Property Name="idClient" Type="int" Nullable="false" />
+    <Property Name="idOrder" Type="int" />
   </EntityType>
   <EntityType Name="Orders">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="units" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
+    <Property Name="dateCreation" Type="datetime" />
   </EntityType>
   <EntityType Name="ProductOrder">
     <Key>
-      <PropertyRef Name="Orders_Id" />
-      <PropertyRef Name="Products_Id" />
+      <PropertyRef Name="id" />
     </Key>
     <Property Name="Orders_Id" Type="int" Nullable="false" />
     <Property Name="Products_Id" Type="int" Nullable="false" />
+    <Property Name="units" Type="int" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Products">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="price" Type="decimal" Precision="19" Scale="4" Nullable="false" />
     <Property Name="image" Type="nvarchar(max)" />
     <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
@@ -39,10 +42,22 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idProduct" Type="int" Nullable="false" />
     <Property Name="units" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Invoices_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductOrder_Orders">
     <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
     <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
@@ -52,6 +67,18 @@
       </Principal>
       <Dependent Role="ProductOrder">
         <PropertyRef Name="Orders_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrder_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductOrder">
+        <PropertyRef Name="Products_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -73,8 +100,16 @@
     <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Invoices_Orders" Association="Self.FK_Invoices_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProductOrder_Orders" Association="Self.FK_ProductOrder_Orders">
       <End Role="Orders" EntitySet="Orders" />
+      <End Role="ProductOrder" EntitySet="ProductOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrder_Products" Association="Self.FK_ProductOrder_Products">
+      <End Role="Products" EntitySet="Products" />
       <End Role="ProductOrder" EntitySet="ProductOrder" />
     </AssociationSet>
     <AssociationSet Name="FK_Stock_products" Association="Self.FK_Stock_products">

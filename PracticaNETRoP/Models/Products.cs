@@ -11,38 +11,26 @@ namespace PracticaNETRoP.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
+    
     public partial class Products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
             this.Stock1 = new HashSet<Stock>();
+            this.ProductOrder = new HashSet<ProductOrder>();
         }
     
         public int Id { get; set; }
         public decimal price { get; set; }
         public string image { get; set; }
-        public HttpPostedFileBase imgFile;
-
-        /*private HttpPostedFileBase imgFile;
-
-        public HttpPostedFileBase GetimgFile()
-        {
-            return imgFile;
-        }
-
-        public void SetimgFile(HttpPostedFileBase value)
-        {
-            imgFile = value;
-        }*/
-
         public string name { get; set; }
         public string description { get; set; }
         public int stock { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stock1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductOrder> ProductOrder { get; set; }
     }
 }
