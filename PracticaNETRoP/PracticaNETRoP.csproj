@@ -331,6 +331,7 @@
     <Content Include="Views\Carrito\Index.cshtml" />
     <Content Include="Views\Carrito\NewOrder.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Carrito\OrderCreated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

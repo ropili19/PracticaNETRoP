@@ -7,7 +7,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="dateInvoice" Type="datetime" Nullable="false" />
-    <Property Name="idClient" Type="int" Nullable="false" />
+    <Property Name="idClient" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="idOrder" Type="int" />
   </EntityType>
   <EntityType Name="Orders">
@@ -15,7 +15,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ClientId" Type="int" Nullable="false" />
+    <Property Name="ClientId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="dateCreation" Type="datetime" />
   </EntityType>
   <EntityType Name="ProductOrder">

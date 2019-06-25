@@ -37,12 +37,17 @@ namespace PracticaNETRoP.Controllers
 
         public ActionResult NewOrder(Carrito sc)
         {
+            string userId = User.Identity.GetUserId();
             Orders order = new Orders();
             decimal amount = 0;
+            order.ClientId = userId;
+            order.dateCreation = DateTime.Now;
+            db.Orders.Add(order);
+            int idorder = db.SaveChanges();
             foreach (Products product in sc)
             {
                 Products productDb = db.Products.Find(product.Id);
-                // order.Products.Add(productDb);
+    
                 amount = amount + productDb.price;
                 productDb.stock--;
 
@@ -56,23 +61,26 @@ namespace PracticaNETRoP.Controllers
 
                    
                     productDb.Stock1.Add(stockDb);
-                    db.SaveChanges();
+                   
                 }
 
-                if (order.ProductOrder == null)
+                Orders ordergen = db.Orders.Find(idorder);
+                if (ordergen.ProductOrder == null)
                 {
                     ProductOrder productOrder = new ProductOrder
                     {
-                        Orders = order,
+                       
                         Products_Id = product.Id,
-                        Orders_Id = order.Id
+                        Orders_Id = idorder
                     };
 
-                    order.ProductOrder.Add(productOrder);
+                    ordergen.ProductOrder.Add(productOrder);
+                    db.ProductOrder.Add(productOrder);
+                    db.SaveChanges();
                 }
                 else
                 {
-                    foreach (ProductOrder prodOrder in order.ProductOrder)
+                    foreach (ProductOrder prodOrder in ordergen.ProductOrder)
                     {
                         if (prodOrder.Products_Id == productDb.Id)
                         {
@@ -80,30 +88,32 @@ namespace PracticaNETRoP.Controllers
                         }
                     }
 
-                    db.Entry(order).State = EntityState.Modified;
+                     db.Entry(ordergen).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
 
-                db.Entry(productDb).State = EntityState.Modified;
+                 db.Entry(productDb).State = EntityState.Modified;
             }
 
-            order.dateCreation = DateTime.Now;
+         
 
-            string userId = User.Identity.GetUserId();
+          
            
 
-             order.ClientId = Int32.Parse(User.Identity.GetUserId());
-            Invoices invoice = new Invoices
-            {
-                dateInvoice = DateTime.Now,
-                amount = amount
-            };
-
-           db.Invoices.Add(invoice);
+           
+            Invoices invoice = new Invoices();
+            invoice.idClient = userId;
+            invoice.idOrder = order.Id;
+            invoice.amount = amount;
+            invoice.dateInvoice = DateTime.Now;
+            
             db.Orders.Add(order);
+            db.Invoices.Add(invoice);
+        
             db.SaveChanges();
             sc.Clear();
 
-            return RedirectToAction("NewOrder");
+            return RedirectToAction("OrderCreated");
         }
 
         public ActionResult OrderCreated()

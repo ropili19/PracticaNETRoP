@@ -1,4 +1,5 @@
-﻿@model PracticaNETRoP.Models.Products
+﻿@using Microsoft.AspNet.Identity
+@model PracticaNETRoP.Models.Products
 
 <div>
     <h4>Products</h4>
@@ -17,11 +18,13 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.image)
+
+            <img src="@(Model.image)" with="40px" height="100px" alt="Image" />
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.name)
+
         </dt>
 
         <dd>
@@ -47,6 +50,17 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @if (User.Identity.GetUserName().Equals("admin@upm.es"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    }
+    @if (User.Identity.GetUserId() == null)
+    {
+        @Html.ActionLink("Back to Home", "Index", "Home")
+    }
+    else
+    {
     @Html.ActionLink("Back to List", "Index")
+    }
+
 </p>

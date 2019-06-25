@@ -12,7 +12,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="dateInvoice" Type="datetime" Nullable="false" />
-          <Property Name="idClient" Type="int" Nullable="false" />
+          <Property Name="idClient" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="idOrder" Type="int" />
         </EntityType>
         <EntityType Name="Orders">
@@ -20,7 +20,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="dateCreation" Type="datetime" />
         </EntityType>
         <EntityType Name="ProductOrder">
@@ -133,7 +133,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="dateInvoice" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idClient" Type="Int32" Nullable="false" />
+          <Property Name="idClient" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="idOrder" Type="Int32" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Invoices_Orders" FromRole="Invoices" ToRole="Orders" />
         </EntityType>
@@ -144,7 +144,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Orders" FromRole="Orders" ToRole="Invoices" />
           <NavigationProperty Name="ProductOrder" Relationship="Self.FK_ProductOrder_Orders" FromRole="Orders" ToRole="ProductOrder" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="dateCreation" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ProductOrder">

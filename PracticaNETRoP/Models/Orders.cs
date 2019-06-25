@@ -22,7 +22,7 @@ namespace PracticaNETRoP.Models
         }
     
         public int Id { get; set; }
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         public Nullable<System.DateTime> dateCreation { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

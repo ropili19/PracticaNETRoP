@@ -17,7 +17,7 @@ namespace PracticaNETRoP.Models
         public int Id { get; set; }
         public decimal amount { get; set; }
         public System.DateTime dateInvoice { get; set; }
-        public int idClient { get; set; }
+        public string idClient { get; set; }
         public Nullable<int> idOrder { get; set; }
     
         public virtual Orders Orders { get; set; }

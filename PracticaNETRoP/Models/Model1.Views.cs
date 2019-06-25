@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(PracticaNETRoP.Models.VirtualShopEntities),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets19df825776fc6166fc290cc0784d879905e3484c962f40a79c1af77825deb3f1))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets946b647e7e2a3d8fdb2066b08f7ae49f02d4c47fc7cfcd4d7d407a5a313d9ab7))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework 6 Power Tools", "0.9.2.0")]
-    internal sealed class ViewsForBaseEntitySets19df825776fc6166fc290cc0784d879905e3484c962f40a79c1af77825deb3f1 : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySets946b647e7e2a3d8fdb2066b08f7ae49f02d4c47fc7cfcd4d7d407a5a313d9ab7 : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "19df825776fc6166fc290cc0784d879905e3484c962f40a79c1af77825deb3f1"; }
+            get { return "946b647e7e2a3d8fdb2066b08f7ae49f02d4c47fc7cfcd4d7d407a5a313d9ab7"; }
         }
 
         /// <summary>
