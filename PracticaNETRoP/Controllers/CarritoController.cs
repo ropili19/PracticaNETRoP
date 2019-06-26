@@ -44,8 +44,11 @@ namespace PracticaNETRoP.Controllers
             order.dateCreation = DateTime.Now;
             db.Orders.Add(order);
             int idorder = db.SaveChanges();
+            Orders ordergen = null;
+            db.Entry(order).State = EntityState.Modified;
             foreach (Products product in sc)
             {
+                ordergen = db.Orders.Find(order.Id);
                 Products productDb = db.Products.Find(product.Id);
     
                 amount = amount + productDb.price;
@@ -58,24 +61,22 @@ namespace PracticaNETRoP.Controllers
                         idProduct = productDb.Id,
                         units = productDb.stock
                     };
-
-                   
                     productDb.Stock1.Add(stockDb);
-                   
+                    db.SaveChanges();
                 }
 
-                Orders ordergen = db.Orders.Find(idorder);
-                if (ordergen.ProductOrder == null)
+                if (ordergen.ProductOrder.Count==0)
                 {
                     ProductOrder productOrder = new ProductOrder
                     {
-                       
                         Products_Id = product.Id,
-                        Orders_Id = idorder
+                        Orders_Id = ordergen.Id,
+                        units = 1
                     };
 
                     ordergen.ProductOrder.Add(productOrder);
                     db.ProductOrder.Add(productOrder);
+                    //db.Entry(productOrder).State = EntityState.Modified;
                     db.SaveChanges();
                 }
                 else
@@ -86,9 +87,11 @@ namespace PracticaNETRoP.Controllers
                         {
                             prodOrder.units++;
                         }
+                        db.Entry(prodOrder).State = EntityState.Modified;
                     }
-
-                     db.Entry(ordergen).State = EntityState.Modified;
+                       
+         
+                    db.Entry(ordergen).State = EntityState.Modified;
                     db.SaveChanges();
                 }
 
@@ -103,11 +106,11 @@ namespace PracticaNETRoP.Controllers
            
             Invoices invoice = new Invoices();
             invoice.idClient = userId;
-            invoice.idOrder = order.Id;
+            invoice.idOrder = ordergen.Id;
             invoice.amount = amount;
             invoice.dateInvoice = DateTime.Now;
             
-            db.Orders.Add(order);
+            //db.Orders.Add(order);
             db.Invoices.Add(invoice);
         
             db.SaveChanges();

@@ -128,7 +128,7 @@ namespace PracticaNETRoP.Controllers
             {
                 if (product.Stock1 != null && product.stock > PRODUCT_WITHOUT_STOCK)
                 {
-                    //TODO la relacion debe ser 1 a 1 --> Deuda técnica
+                 
                     foreach (var stock in product.Stock1)
                     {
                         product.Stock1.Remove(stock);
@@ -144,6 +144,7 @@ namespace PracticaNETRoP.Controllers
                     };
 
                     product.Stock1.Add(stock);
+                 
                 }
 
                 db.Entry(product).State = EntityState.Modified;
